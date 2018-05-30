@@ -21,7 +21,7 @@ class BackgroundService : IntentService("BackgroundService") {
             override fun onEvent(event: Int, path: String?) {
                 when(event){
                     FileObserver.CREATE -> {
-                        val fullPath = listenDir + "/" + path
+                        val fullPath = "$listenDir/$path"
                         Log.d(TAG, "File created [%s] Full path: [%s]".format(path, fullPath))
                         upload(fullPath, path)
                     }
