@@ -10,10 +10,9 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         val PATH = "/storage/emulated/0/DCIM/Screenshots"
 
-
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        Log.d(TAG, "Starting background intent thingy... Path: [%s]".format(PATH))
+        Log.d(TAG, "Starting background intent thingy... Path: [$PATH]")
         val i = Intent(super.getApplicationContext(), BackgroundService::class.java)
         i.putExtra("listen_dir", PATH)
         startService(i)

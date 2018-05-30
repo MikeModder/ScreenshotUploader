@@ -22,13 +22,13 @@ class BackgroundService : IntentService("BackgroundService") {
                 when(event){
                     FileObserver.CREATE -> {
                         val fullPath = "$listenDir/$path"
-                        Log.d(TAG, "File created [%s] Full path: [%s]".format(path, fullPath))
+                        Log.d(TAG, "File created [$path] Full path: [$fullPath]")
                         upload(fullPath, path)
                     }
                 }
             }
         }
-        Log.d(TAG, "Starting to listen... [%s]".format(listenDir))
+        Log.d(TAG, "Starting to listen... [$listenDir]")
         observer.startWatching()
 
     }
@@ -55,12 +55,12 @@ class BackgroundService : IntentService("BackgroundService") {
             override fun onResponse(call: Call?, response: Response?) {
                 if(response?.code() == 400) Log.d(TAG, "400"); return
                 val text = response?.body()?.string()
-                Log.d(TAG, "Response [%s]".format(text))
+                Log.d(TAG, "Response [$text]")
                 val json = JSONObject(text)
                 val err = json.getBoolean("error")
                 if(err) Log.d(TAG, "vgy.me said there was an error")
-                val imageUrl = json.get("image");
-                Log.d(TAG, "Uploaded okay> [%s]".format(imageUrl))
+                val imageUrl = json.get("image")
+                Log.d(TAG, "Uploaded okay? [$imageUrl]")
             }
 
             override fun onFailure(call: Call?, e: IOException?) {
@@ -69,7 +69,7 @@ class BackgroundService : IntentService("BackgroundService") {
             }
         })
 
-        Log.d(TAG, "Trying to upload [%s]".format(path))
+        Log.d(TAG, "Trying to upload [$fileName]")
 
     }
 
